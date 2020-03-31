@@ -1,9 +1,10 @@
 import React from "react";
+
 import CollectionItem from "../collection-item/collection-item.component";
 
 import "./collection-preview.styles.scss";
 
-const CollectionPreview = ({ title, items }) => {
+const CollectionPreview = ({ title, items, history, match, routeName }) => {
   return (
     <div className="collection-preview">
       <h1 className="title">{title.toUpperCase()}</h1>
@@ -11,7 +12,13 @@ const CollectionPreview = ({ title, items }) => {
         {items
           .filter((item, index) => index < 4)
           .map(item => (
-            <CollectionItem key={item.id} item={item} />
+            <CollectionItem
+              key={item.id}
+              item={item}
+              onClick={() =>
+                history.push(`${match.url}/${routeName}/${item.id}`)
+              }
+            />
           ))}
       </div>
     </div>
